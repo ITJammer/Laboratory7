@@ -1,6 +1,5 @@
 package com.espelimbergo.lab_7;
 
-import com.espelimbergo.lab_7.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
