@@ -1,15 +1,15 @@
-package com.espelimbergo.lab_7;
+package com.espelimbergo.lab_7.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Product {
-    private Long id;
-    private String name;
-    private Double price;
-}
+import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Student {
+    private String name;
+    List<User> accounts;
+}

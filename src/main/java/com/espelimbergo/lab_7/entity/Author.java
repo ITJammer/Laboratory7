@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,24 +13,19 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class Author {
     @Id
-    @Column(name = "book_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long authId;
 
-    String title;
+    String authName;
 
-    int pages;
-
-    @ManyToOne
-    Author author;
+    @OneToMany (cascade = CascadeType.ALL)
+    @ToString.Exclude
+    List<Book> authoredBooks;
 
 //    @ManyToMany
-//    @JoinTable(name = "bookAuthors",
-//            joinColumns = @JoinColumn(name = "book"),
-//            inverseJoinColumns = @JoinColumn(name = "author"))
-//    List<Author> authors;
+//    List<Book> books;
 
     @Override
     public final boolean equals(Object o) {
@@ -38,8 +34,8 @@ public class Book {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Book book = (Book) o;
-        return getId() != null && Objects.equals(getId(), book.getId());
+        Author author = (Author) o;
+        return getAuthId() != null && Objects.equals(getAuthId(), author.getAuthId());
     }
 
     @Override
